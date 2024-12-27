@@ -1,0 +1,350 @@
+{
+	"info": {
+		"_postman_id": "profile-api-collection",
+		"name": "Kelibe Profile API",
+		"description": "API collection for testing profile management endpoints",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8000",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "your_access_token_here",
+			"type": "string"
+		}
+	],
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"if (jsonData.access) {",
+									"    pm.collectionVariables.set(\"token\", jsonData.access);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"your_email@example.com\",\n    \"password\": \"your_password\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/auth/login/",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "auth", "login"]
+						},
+						"description": "Login to get access token"
+					}
+				}
+			]
+		},
+		{
+			"name": "Categories",
+			"item": [
+				{
+					"name": "List Categories",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/profile/categories/",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "profile", "categories"]
+						},
+						"description": "Get all categories with their questions and completion percentage"
+					}
+				},
+				{
+					"name": "Get Category Detail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/profile/categories/1/",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "profile", "categories", "1"]
+						},
+						"description": "Get detailed information about a specific category including user responses"
+					}
+				},
+				{
+					"name": "Get Category Questions",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/profile/categories/1/questions/",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "profile", "categories", "1", "questions"]
+						},
+						"description": "Get all questions for a specific category"
+					}
+				}
+			]
+		},
+		{
+			"name": "User Responses",
+			"item": [
+				{
+					"name": "List User Responses",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/profile/responses/",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "profile", "responses"]
+						},
+						"description": "Get all responses for the current user"
+					}
+				},
+				{
+					"name": "Create Single Response",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"question\": 1,\n    \"response\": \"My core values include honesty and integrity\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/profile/responses/",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "profile", "responses"]
+						},
+						"description": "Create a single response for a question"
+					}
+				},
+				{
+					"name": "Bulk Update Responses",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"category_id\": \"1\",\n    \"responses\": [\n        {\n            \"question\": 1,\n            \"response\": \"My core values include honesty and integrity\"\n        },\n        {\n            \"question\": 2,\n            \"response\": \"I maintain authenticity through open communication\"\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/profile/responses/bulk_update/",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "profile", "responses", "bulk_update"]
+						},
+						"description": "Bulk update responses for a category"
+					}
+				},
+				{
+					"name": "Update Response",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"question\": 1,\n    \"response\": \"Updated response about my core values\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/profile/responses/1/",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "profile", "responses", "1"]
+						},
+						"description": "Update an existing response"
+					}
+				},
+				{
+					"name": "Delete Response",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/profile/responses/1/",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "profile", "responses", "1"]
+						},
+						"description": "Delete a response"
+					}
+				}
+			]
+		},
+		{
+			"name": "Example Responses",
+			"item": [
+				{
+					"name": "Single Choice Response",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"question\": 3,\n    \"response\": \"Bachelor\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/profile/responses/",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "profile", "responses"]
+						},
+						"description": "Example of creating a single choice response"
+					}
+				},
+				{
+					"name": "Multiple Choice Response",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"question\": 5,\n    \"response\": [\"Reading\", \"Music\", \"Gaming\"]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/profile/responses/",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "profile", "responses"]
+						},
+						"description": "Example of creating a multiple choice response"
+					}
+				},
+				{
+					"name": "Scale Response",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"question\": 4,\n    \"response\": 8\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/profile/responses/",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "profile", "responses"]
+						},
+						"description": "Example of creating a scale response"
+					}
+				},
+				{
+					"name": "Boolean Response",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"question\": 7,\n    \"response\": true\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/profile/responses/",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "profile", "responses"]
+						},
+						"description": "Example of creating a boolean response"
+					}
+				}
+			]
+		}
+	]
+}

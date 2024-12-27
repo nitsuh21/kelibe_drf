@@ -1,0 +1,149 @@
+[
+    {
+        "model": "core.category",
+        "pk": 1,
+        "fields": {
+            "title": "Core Values & Identity",
+            "description": "Your personality, beliefs, and values that define who you are",
+            "icon": "UserGroupIcon",
+            "color": "#6366F1",
+            "order": 1,
+            "created_at": "2024-12-17T14:48:34Z",
+            "updated_at": "2024-12-17T14:48:34Z"
+        }
+    },
+    {
+        "model": "core.category",
+        "pk": 2,
+        "fields": {
+            "title": "Growth Mindset",
+            "description": "Your approach to learning and personal development",
+            "icon": "BookOpenIcon",
+            "color": "#8B5CF6",
+            "order": 2,
+            "created_at": "2024-12-17T14:48:34Z",
+            "updated_at": "2024-12-17T14:48:34Z"
+        }
+    },
+    {
+        "model": "core.category",
+        "pk": 3,
+        "fields": {
+            "title": "Interests & Hobbies",
+            "description": "Your passions and recreational activities",
+            "icon": "MusicalNoteIcon",
+            "color": "#D4A5A5",
+            "order": 3,
+            "created_at": "2024-12-17T14:48:34Z",
+            "updated_at": "2024-12-17T14:48:34Z"
+        }
+    },
+    {
+        "model": "core.category",
+        "pk": 4,
+        "fields": {
+            "title": "Career Goals",
+            "description": "Your professional aspirations and development",
+            "icon": "BriefcaseIcon",
+            "color": "#EC4899",
+            "order": 4,
+            "created_at": "2024-12-17T14:48:34Z",
+            "updated_at": "2024-12-17T14:48:34Z"
+        }
+    },
+    {
+        "model": "core.question",
+        "pk": 1,
+        "fields": {
+            "category": 1,
+            "text": "What are your core beliefs that guide your daily decisions?",
+            "question_type": "short_answer",
+            "required": true,
+            "order": 1,
+            "created_at": "2024-12-17T14:48:34Z",
+            "updated_at": "2024-12-17T14:48:34Z"
+        }
+    },
+    {
+        "model": "core.question",
+        "pk": 2,
+        "fields": {
+            "category": 1,
+            "text": "How do you maintain authenticity in your relationships?",
+            "question_type": "short_answer",
+            "required": true,
+            "order": 2,
+            "created_at": "2024-12-17T14:48:34Z",
+            "updated_at": "2024-12-17T14:48:34Z"
+        }
+    },
+    {
+        "model": "core.question",
+        "pk": 3,
+        "fields": {
+            "category": 2,
+            "text": "What's your highest level of education?",
+            "question_type": "single_choice",
+            "options": ["High School", "Some College", "Bachelor", "Master", "Doctorate"],
+            "required": true,
+            "order": 1,
+            "created_at": "2024-12-17T14:48:34Z",
+            "updated_at": "2024-12-17T14:48:34Z"
+        }
+    },
+    {
+        "model": "core.question",
+        "pk": 4,
+        "fields": {
+            "category": 2,
+            "text": "How comfortable are you with learning new technologies?",
+            "question_type": "scale",
+            "min_value": 1,
+            "max_value": 10,
+            "required": true,
+            "order": 2,
+            "created_at": "2024-12-17T14:48:34Z",
+            "updated_at": "2024-12-17T14:48:34Z"
+        }
+    },
+    {
+        "model": "core.question",
+        "pk": 5,
+        "fields": {
+            "category": 3,
+            "text": "What are your favorite hobbies?",
+            "question_type": "multiple_choice",
+            "options": ["Reading", "Sports", "Music", "Art", "Gaming", "Cooking", "Travel", "Photography"],
+            "required": true,
+            "order": 1,
+            "created_at": "2024-12-17T14:48:34Z",
+            "updated_at": "2024-12-17T14:48:34Z"
+        }
+    },
+    {
+        "model": "core.question",
+        "pk": 6,
+        "fields": {
+            "category": 4,
+            "text": "What's your dream job?",
+            "question_type": "short_answer",
+            "required": true,
+            "order": 1,
+            "created_at": "2024-12-17T14:48:34Z",
+            "updated_at": "2024-12-17T14:48:34Z"
+        }
+    },
+    {
+        "model": "core.question",
+        "pk": 7,
+        "fields": {
+            "category": 4,
+            "text": "Are you currently open to new job opportunities?",
+            "question_type": "boolean",
+            "required": true,
+            "order": 2,
+            "created_at": "2024-12-17T14:48:34Z",
+            "updated_at": "2024-12-17T14:48:34Z"
+        }
+    }
+]

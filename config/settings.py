@@ -169,6 +169,9 @@ SOCIALACCOUNT_EMAIL_VERIFICATION = 'none'
 SOCIALACCOUNT_AUTO_SIGNUP = True
 REST_USE_JWT = True
 
+# Frontend URL for email verification
+FRONTEND_URL = os.getenv('FRONTEND_URL', 'http://localhost:3000')
+
 # REST Framework settings
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
